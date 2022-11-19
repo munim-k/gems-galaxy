@@ -1,0 +1,111 @@
+﻿  main.cpp
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(132,120): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(132,88): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(139,122): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(139,90): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(145,122): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(145,90): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(151,123): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(151,91): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(162,120): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(162,88): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(227,127): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(227,91): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Paras Tech Traders\Desktop\projects\gems\gems\main.cpp(231,27): warning C4101: 'closing': unreferenced local variable
+  gems.vcxproj -> C:\Users\Paras Tech Traders\Desktop\projects\gems\x64\Debug\gems.exe
