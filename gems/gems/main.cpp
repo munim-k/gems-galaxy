@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1055,556), "MAIN MENU");
-    window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(60);
 
 
     //GEMS GALAXY heading data(heading,headingfont):
@@ -21,6 +21,17 @@ int main()
     heading.setLetterSpacing(2);
     heading.move(sf::Vector2f(300, 10));
     heading.setStyle(sf::Text::Underlined | sf::Text::Bold);
+
+    //credits:
+    Text creds;
+    creds.setFont(headingfont);
+    creds.Bold;
+    creds.setFillColor(Color::Black);
+    creds.setString("MUNIM KHALIQ && ARSAL MANAN");
+    creds.setPosition(280, 500);
+    creds.setOutlineColor(Color::Red);
+    creds.setOutlineThickness(3);
+    
 
     sf::RectangleShape headbox(sf::Vector2f(535,75));
     headbox.setFillColor(sf::Color::Black);
@@ -90,9 +101,10 @@ int main()
     mainmusic.loadFromFile("music.wav");
     Sound music;
     music.setBuffer(mainmusic);
-    music.setPlayingOffset(sf::seconds(8.f));
+    music.setPlayingOffset(sf::seconds(12.f));
     music.play();
     music.setLoop(true);
+    music.setVolume(100);
     int flag = 1;
     int game = 0;
     
@@ -123,6 +135,7 @@ int main()
                 window.draw(cross1);
                 window.draw(button2);
                 window.draw(mute1);
+                window.draw(creds);
                 window.display();
 
 
@@ -143,6 +156,7 @@ int main()
                     {
                         if (mute1.getGlobalBounds().contains(theMouse.getPosition(window).x, theMouse.getPosition(window).y) == true) {
                             flag = 1;
+                            music.setPlayingOffset(sf::seconds(12.f));
                             music.play();
                         }
                     }
@@ -174,7 +188,7 @@ int main()
 
         //window:
         RenderWindow gamewindow(VideoMode(1202, 600), "GEMS GALAXY");
-        gamewindow.setVerticalSyncEnabled(true);
+        gamewindow.setFramerateLimit(60);
         //newgame: 
         
         //background:
@@ -272,7 +286,23 @@ int main()
         score.setFillColor(Color::Black);
         score.setOutlineColor(Color::Green);
         score.setOutlineThickness(5);
-      
+
+        Text scorenumber;
+        scorenumber.setFont(headingfont);
+        scorenumber.move(825, 210);
+        scorenumber.setCharacterSize(40);
+        scorenumber.setFillColor(Color::White);
+        scorenumber.setOutlineColor(Color::Black);
+        scorenumber.setOutlineThickness(3);
+        scorenumber.setString("0000");
+
+        //importing gems:
+        Image red; red.loadFromFile("red.png");
+        Image green; green.loadFromFile("green.png");
+        Image blue; blue.loadFromFile("blue.png");
+        Image yellow; yellow.loadFromFile("green.png");
+        Image orange; orange.loadFromFile("orange.png");
+        
         while (gamewindow.isOpen())
         {
             gametimedisplay = gametime.getElapsedTime();
@@ -295,6 +325,7 @@ int main()
                 gamewindow.draw(timebar);
                 gamewindow.draw(scoreboard);
                 gamewindow.draw(score);
+                gamewindow.draw(scorenumber);
                 gamewindow.display();
             }
             //timebar updates:

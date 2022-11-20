@@ -1,5 +1,5 @@
 ﻿  main.cpp
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(131,120): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(144,120): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -8,7 +8,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(131,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(131,88): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(144,88): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -17,7 +17,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(131,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(138,122): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(151,122): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -26,7 +26,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(138,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(138,90): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(151,90): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -35,7 +35,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(138,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(144,122): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(157,122): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -44,7 +44,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(144,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(144,90): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(157,90): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -53,7 +53,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(144,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(150,123): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(164,123): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -62,7 +62,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(150,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(150,91): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(164,91): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -71,7 +71,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(150,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(161,120): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(175,120): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -80,7 +80,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(161,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(161,88): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(175,88): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -89,7 +89,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(161,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(285,127): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(318,127): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -98,7 +98,7 @@ C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(285,
           [
               T=float
           ]
-C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(285,91): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Paras Tech Traders\Documents\GitHub\gems galaxy\gems\gems\main.cpp(318,91): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
