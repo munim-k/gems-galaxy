@@ -1,10 +1,22 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include<SFML/audio.hpp>
+#include<ctime>
+#include <string>
 using namespace sf;
 using namespace std;
+int tilesize = 62;
+Keyboard keyboard;
+
+
+
+  
+    
+   
+
 int main()
 {
+    srand(time(0));
     sf::RenderWindow window(sf::VideoMode(1055,556), "MAIN MENU");
     window.setFramerateLimit(60);
 
@@ -17,7 +29,7 @@ int main()
     heading.setCharacterSize(50);
     heading.Bold;
     heading.setString("GEMS GALAXY");
-    heading.setFillColor(sf::Color::Red);
+    heading.setFillColor(Color::Red);
     heading.setLetterSpacing(2);
     heading.move(sf::Vector2f(300, 10));
     heading.setStyle(sf::Text::Underlined | sf::Text::Bold);
@@ -296,27 +308,92 @@ int main()
         scorenumber.setOutlineThickness(3);
         scorenumber.setString("0000");
 
-        //importing gems:
-        Image red; red.loadFromFile("red.png");
-        Image green; green.loadFromFile("green.png");
-        Image blue; blue.loadFromFile("blue.png");
-        Image yellow; yellow.loadFromFile("green.png");
-        Image orange; orange.loadFromFile("orange.png");
+        //gems:
         
+        Texture gemtexture; gemtexture.loadFromFile("gems.png");
+        Sprite gem(gemtexture);
+        
+        struct gems
+        {
+            int xpos, ypos, row, col, match, color;
+            gems() { match = 0; }
+
+        }
+        gridarr[8][8];
+
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                gridarr[i][j].color = rand() % 5;
+                gridarr[i][j].xpos = j*tilesize;
+                gridarr[i][j].ypos = i*tilesize;
+                gridarr[i][j].row = i;
+                gridarr[i][j].col = j;
+            }
+        }
+        //cursor;
+        float cursorx = 77;
+        float cursory = 80;
+        int cursori = 0;
+        int cursorj = 0;
+        RectangleShape cursor;
+        cursor.setOutlineColor(Color::Red);
+        cursor.setOutlineThickness(2);
+        cursor.setPosition(cursorx, cursory);
+        cursor.setFillColor(Color::Transparent);
+        cursor.setSize(Vector2f(63,63));
+        Vector2i offset(138, 143);
+        int clicked = 0;
+
+       
+
+
+
+        bool pressed1=false;
+        bool pressed2 = false;
+        bool pressed3 = false;
+        bool pressed4 = false;
+        bool pressedenter = false;
+
         while (gamewindow.isOpen())
         {
             gametimedisplay = gametime.getElapsedTime();
-            sf::Event closing;
-            while (gamewindow.pollEvent(closing))
+            sf::Event event;
+            while (gamewindow.pollEvent(event))
             {
-                if (closing.type == sf::Event::Closed)
+                if (event.type == sf::Event::Closed)
                     gamewindow.close();
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                else if (event.type == Event::MouseButtonPressed)
+                  if( sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                     if (cross2.getGlobalBounds().contains(theMouse.getPosition(gamewindow).x, theMouse.getPosition(gamewindow).y) == true) {
                         gamewindow.close();
                     }
                 }
-
+                if (event.type==Event::KeyPressed)
+                {
+                    if (Keyboard::isKeyPressed(Keyboard::Up))
+                    {
+                        pressed1 = true;
+                    }
+                    else if (Keyboard::isKeyPressed(Keyboard::Down))
+                    {
+                        pressed2=true;
+                    }
+                    else if (Keyboard::isKeyPressed(Keyboard::Left))
+                    {
+                        pressed3 = true;
+                    }
+                    else if (Keyboard::isKeyPressed(Keyboard::Right))
+                    {
+                        pressed4 = true;
+                    }
+                    else if (Keyboard::isKeyPressed(Keyboard::Enter))
+                    {
+                        pressedenter = true;
+                    }
+                }
+            }
                 gamewindow.clear();
                 gamewindow.draw(newgamebg);
                 gamewindow.draw(grid);
@@ -326,8 +403,116 @@ int main()
                 gamewindow.draw(scoreboard);
                 gamewindow.draw(score);
                 gamewindow.draw(scorenumber);
+                
+                for (int i = 0; i < 8; i++)
+                    for (int j = 0; j < 8; j++)
+                    {
+                        gems p;
+                        p = gridarr[i][j];
+                        gem.setTextureRect(IntRect(p.color * 65, 0, 65, 65));
+                        gem.setColor(Color(255, 255, 255));
+                        gem.setPosition(p.xpos, p.ypos);
+                        gem.move(offset.x - tilesize, offset.y - tilesize);
+                        gamewindow.draw(gem);
+                    }
+                gamewindow.draw(cursor);
                 gamewindow.display();
-            }
+               
+                
+
+                
+                cursorx = cursor.getPosition().x;
+                cursory = cursor.getPosition().y;
+                if (pressedenter)
+                {
+                    clicked = 1;
+                    pressedenter = false;
+                }
+                if (clicked == 0)
+                {
+                    if (pressed4 && cursorx < 511)
+                    {
+                        cursor.move(62, 0);
+                        cursori++;
+                        pressed4 = false;
+                        if (cursori > 7)
+                        {
+                            cursori = 7;
+                        }
+                    }
+                    else if (pressed3 && cursorx > 77)
+                    {
+                        cursor.move(-62, 0);
+                        cursori--;
+                        pressed3 = false;
+                        if (cursori < 0)
+                        {
+                            cursori = 0;
+                        }
+                    }
+                    else if (pressed2 && cursory < 511)
+                    {
+                        cursor.move(0, 62);
+                        cursorj++;
+                        if (cursorj > 7)
+                            cursorj = 7;
+                        pressed2 = false;
+                    }
+                    else if (pressed1 && cursory > 80)
+                    {
+                        cursor.move(0, -62);
+                        cursorj--;
+                        if (cursorj < 0)
+                            cursorj = 0;
+                        pressed1 = false;
+                    }
+                    
+                }
+                                   
+                else if (clicked == 1)
+                {
+                    int temp; 
+                    if (pressed1)
+                    {
+                        temp = gridarr[cursorj][cursori].color;
+                        cout << temp;
+                        gridarr[cursorj][cursori].color = gridarr[cursorj-1][cursori].color;
+                        gridarr[cursorj-1][cursori].color = temp;
+                        pressed1 = false;
+                        clicked = 0;
+
+                    }
+                    else if (pressed2)
+                    {
+                        temp = gridarr[cursorj][cursori].color;
+                        gridarr[cursorj][cursori].color = gridarr[cursorj+1][cursori].color;
+                        gridarr[cursorj+1][cursori].color = temp;
+                        pressed2 = false;
+                        clicked = 0;
+                    }
+                    else if (pressed3)
+                    {
+                        temp = gridarr[cursorj][cursori].color;
+                        gridarr[cursorj][cursori].color = gridarr[cursorj][cursori-1].color;
+                        gridarr[cursorj][cursori-1].color = temp;
+                        pressed3 = false;
+                        clicked = 0;
+                    }
+                    else if (pressed4)
+                    {
+                        temp = gridarr[cursorj][cursori].color;
+                        gridarr[cursorj][cursori].color = gridarr[cursorj][cursori+1].color;
+                        gridarr[cursorj][cursori+1].color = temp;
+                        pressed4 = false;
+                        clicked = 0;
+                    }
+                }
+
+
+
+
+                
+            
             //timebar updates:
             if (gametimedisplay.asSeconds() < 21 && gametimedisplay.asSeconds() > 10)
             {
@@ -368,6 +553,8 @@ int main()
             else if (gametimedisplay.asSeconds()>101) cout << "game over";                                                      //change later!!!!!!!!!!!!!!!!!!!
             
         }
+       
    }
+   
     return 0;
 }
