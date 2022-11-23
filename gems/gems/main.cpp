@@ -10,7 +10,14 @@ Keyboard keyboard;
 
 
 
-  
+
+void swapping(int &a, int &b)
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+  }
     
    
 
@@ -346,8 +353,7 @@ int main()
         Vector2i offset(138, 143);
         int clicked = 0;
 
-       
-
+        
 
 
         bool pressed1=false;
@@ -417,8 +423,110 @@ int main()
                     }
                 gamewindow.draw(cursor);
                 gamewindow.display();
-               
+                int a;
+                int b;
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (gridarr[i][j].color == gridarr[i + 1][j].color && gridarr[i][j].color == gridarr[i + 2][j].color && gridarr[i][j].color == gridarr[i + 3][j].color && gridarr[i][j].color == gridarr[i + 4][j].color)
+                        {
+                            gridarr[i][j].color = 6; gridarr[i + 1][j].color = 6; gridarr[i + 2][j].color = 6; gridarr[i + 3][j].color = 6; gridarr[i + 4][j].color = 6;
+                            a = i;
+                            b = j;
+                            for (int k = 1; a > 0; k++)
+                            {
+                              
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color); swapping(gridarr[a + 3][b].color, gridarr[a + 2][b].color); swapping(gridarr[a + 4][b].color, gridarr[a + 3][b].color);
+                                a = a - 1;
+                            }
+                        }
+                        else if (gridarr[i][j].color == gridarr[i][j + 1].color && (gridarr[i][j].color == gridarr[i][j + 2].color) && (gridarr[i][j].color == gridarr[i][j + 3].color && gridarr[i][j].color == gridarr[i][j+4].color))
+                        {
+                            gridarr[i][j].color = 6;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j + 3].color = 6; gridarr[i][j + 4].color = 6;
+                            a = i;
+                            b = j;
+
+                            for (int k = 1; a > 0; k++)
+                            {
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color); swapping(gridarr[a][b + 3].color, gridarr[a - 1][b + 3].color); swapping(gridarr[a][b + 4].color, gridarr[a - 1][b + 4].color);
+                                a = a - 1;
+                            }
+                        }
+                    }
+                }
                 
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if ((gridarr[i][j].color == gridarr[i][j + 1].color) && (gridarr[i][j].color == gridarr[i][j + 2].color) && (gridarr[i][j].color == gridarr[i][j + 3].color))
+                        {
+                            gridarr[i][j].color = 6;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j + 3].color = 6;
+                            a = i;
+                            b = j;
+                            for (int k = 1; a > 0; k++)
+                            {
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color); swapping(gridarr[a][b + 3].color, gridarr[a - 1][b + 3].color);
+                                a = a - 1;
+                            }
+                        }
+                        else if (gridarr[i][j].color == gridarr[i][j + 1].color && (gridarr[i][j].color == gridarr[i][j + 2].color))
+                        {
+                            gridarr[i][j].color = 6;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6;
+                            a = i;
+                            b = j;
+                            for (int k = 1; a > 0; k++)
+                            {
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color);
+                                a = a - 1;
+                            }
+                        }
+                    }
+                }
+               
+                    for (int i = 0; i < 6; i++)
+                    {
+
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (gridarr[i][j].color == gridarr[i + 1][j].color && gridarr[i][j].color == gridarr[i + 2][j].color && gridarr[i][j].color == gridarr[i + 3][j].color)
+                            {
+                                gridarr[i][j].color = 6; gridarr[i + 1][j].color = 6; gridarr[i + 2][j].color = 6; gridarr[i + 3][j].color = 6;
+                                a = i;
+                                b = j;
+                                for (int k = 1; a > 0; k++)
+                                {
+                                    swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color); swapping(gridarr[a + 3][b].color, gridarr[a + 2][b].color);
+                                    a = a - 1;
+                                }
+                            }
+                            else if (gridarr[i][j].color == gridarr[i + 1][j].color && gridarr[i][j].color == gridarr[i + 2][j].color)
+                            {
+                                gridarr[i][j].color = 6; gridarr[i + 1][j].color = 6; gridarr[i + 2][j].color = 6;
+                                a = i;
+                                b = j;
+                                for (int k = 1; a > 0; k++)
+                                {
+                                    swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color);
+                                    a = a - 1;
+                                }
+                            }
+                        }
+                    }
+                    
+
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (gridarr[i][j].color == 6)
+                        {
+                            gridarr[i][j].color = rand() % 5;
+                        }
+                    }
+                }
+
 
                 
                 cursorx = cursor.getPosition().x;
@@ -507,7 +615,7 @@ int main()
                         clicked = 0;
                     }
                 }
-
+                
 
 
 
