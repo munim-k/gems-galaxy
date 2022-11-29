@@ -18,7 +18,30 @@ void swapping(int &a, int &b)
     a = b;
     b = temp;
   }
-    
+int colorreturn(int x)
+{
+    if (x == 0)
+        return 7;
+    else if (x == 1)
+        return 8;
+    else if (x == 2)
+        return 9;
+    else if (x == 3)
+        return 10;
+    else if (x == 4)
+        return 11;
+    else if (x == 7)
+        return 0;
+    else if (x == 8)
+        return 1;
+    else if (x == 9)
+        return 2;
+    else if (x == 10)
+        return 3;
+    else if (x == 11)
+        return 4;
+
+}
    
 
 int main()
@@ -129,7 +152,7 @@ int main()
     
     
 
-    
+    music.pause();                                     //change later;
 
     
 
@@ -295,7 +318,8 @@ int main()
         const Texture* scoreboardtexture = &scoreboardtexture1;
         scoreboard.setTexture(scoreboardtexture);
         scoreboard.move(650, -50);
-
+        
+       
         Text score;
         score.setFont(headingfont);
         score.setString("SCORE");
@@ -306,6 +330,8 @@ int main()
         score.setOutlineColor(Color::Green);
         score.setOutlineThickness(5);
 
+        
+        int gamescore = 0;
         Text scorenumber;
         scorenumber.setFont(headingfont);
         scorenumber.move(825, 210);
@@ -313,7 +339,18 @@ int main()
         scorenumber.setFillColor(Color::White);
         scorenumber.setOutlineColor(Color::Black);
         scorenumber.setOutlineThickness(3);
-        scorenumber.setString("0000");
+        scorenumber.setString(to_string(gamescore));
+       
+        
+        Text endgame;
+        endgame.setFont(headingfont);
+        endgame.Bold;
+        endgame.setCharacterSize(150);
+        endgame.setFillColor(Color::Black);
+        endgame.setString("GAME END!!!!");
+        endgame.setPosition(200, 300);
+        endgame.setOutlineColor(Color::Red);
+        endgame.setOutlineThickness(3);
 
         //gems:
         
@@ -322,9 +359,7 @@ int main()
         
         struct gems
         {
-            int xpos, ypos, row, col, match, color;
-            gems() { match = 0; }
-
+            int xpos, ypos, row, col, color;       
         }
         gridarr[8][8];
 
@@ -332,7 +367,7 @@ int main()
         {
             for (int j = 0; j < 8; j++)
             {
-                gridarr[i][j].color = rand() % 5;
+                gridarr[i][j].color = (rand()% 5);
                 gridarr[i][j].xpos = j*tilesize;
                 gridarr[i][j].ypos = i*tilesize;
                 gridarr[i][j].row = i;
@@ -353,8 +388,8 @@ int main()
         Vector2i offset(138, 143);
         int clicked = 0;
 
-        
-
+        int swapcolor = 0;
+        bool click = 0;
 
         bool pressed1=false;
         bool pressed2 = false;
@@ -362,6 +397,8 @@ int main()
         bool pressed4 = false;
         bool pressedenter = false;
 
+        bool onetimescore = 0;
+        bool gameend = 0;
         while (gamewindow.isOpen())
         {
             gametimedisplay = gametime.getElapsedTime();
@@ -408,23 +445,30 @@ int main()
                 gamewindow.draw(timebar);
                 gamewindow.draw(scoreboard);
                 gamewindow.draw(score);
-                gamewindow.draw(scorenumber);
                 
+                gamewindow.draw(scorenumber);
+                scorenumber.setString(to_string(gamescore));
                 for (int i = 0; i < 8; i++)
                     for (int j = 0; j < 8; j++)
                     {
                         gems p;
                         p = gridarr[i][j];
-                        gem.setTextureRect(IntRect(p.color * 65, 0, 65, 65));
+                        
+                        gem.setTextureRect(IntRect(p.color*65, 0, 65, 65));
                         gem.setColor(Color(255, 255, 255));
                         gem.setPosition(p.xpos, p.ypos);
                         gem.move(offset.x - tilesize, offset.y - tilesize);
                         gamewindow.draw(gem);
                     }
                 gamewindow.draw(cursor);
+                if (gameend == 1)
+                {
+                    gamewindow.draw(endgame);
+                }
                 gamewindow.display();
                 int a;
                 int b;
+                // 5 match;
                 for (int i = 0; i < 8; i++)
                 {
                     for (int j = 0; j < 8; j++)
@@ -437,39 +481,118 @@ int main()
                             for (int k = 1; a > 0; k++)
                             {
                               
-                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color); swapping(gridarr[a + 3][b].color, gridarr[a + 2][b].color); swapping(gridarr[a + 4][b].color, gridarr[a + 3][b].color);
-                                a = a - 1;
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color);
+                                swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color); swapping(gridarr[a + 3][b].color, gridarr[a + 2][b].color); swapping(gridarr[a + 4][b].color, gridarr[a + 3][b].color);
+                                a = a - 1;                         
                             }
+                            gridarr[i][j].color = 12; gamescore += 50;
                         }
                         else if (gridarr[i][j].color == gridarr[i][j + 1].color && (gridarr[i][j].color == gridarr[i][j + 2].color) && (gridarr[i][j].color == gridarr[i][j + 3].color && gridarr[i][j].color == gridarr[i][j+4].color))
                         {
-                            gridarr[i][j].color = 6;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j + 3].color = 6; gridarr[i][j + 4].color = 6;
+                            gridarr[i][j].color = 12;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j + 3].color = 6; gridarr[i][j + 4].color = 6;
                             a = i;
                             b = j;
 
                             for (int k = 1; a > 0; k++)
                             {
-                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color); swapping(gridarr[a][b + 3].color, gridarr[a - 1][b + 3].color); swapping(gridarr[a][b + 4].color, gridarr[a - 1][b + 4].color);
+                                //swapping(gridarr[a][b].color, gridarr[a - 1][b].color);
+                                swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color); swapping(gridarr[a][b + 3].color, gridarr[a - 1][b + 3].color); swapping(gridarr[a][b + 4].color, gridarr[a - 1][b + 4].color);
                                 a = a - 1;
                             }
+                            gamescore += 50;
                         }
                     }
                 }
-                
+               
+
+
+
+                //special gem horizontal:
                 for (int i = 0; i < 8; i++)
                 {
-                    for (int j = 0; j < 6; j++)
+                    for (int j = 0; j < 8; j++)
                     {
-                        if ((gridarr[i][j].color == gridarr[i][j + 1].color) && (gridarr[i][j].color == gridarr[i][j + 2].color) && (gridarr[i][j].color == gridarr[i][j + 3].color))
+                        if ((gridarr[i][j].color > 6 && gridarr[i][j - 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j + 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j + 2].color == colorreturn(gridarr[i][j].color)) || (gridarr[i][j].color > 6 && gridarr[i][j - 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j - 2].color == colorreturn(gridarr[i][j].color) && gridarr[i][j + 1].color == colorreturn(gridarr[i][j].color)) || (gridarr[i][j].color > 6 && gridarr[i][j - 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j - 2].color == colorreturn(gridarr[i][j].color) && gridarr[i][j - 3].color == colorreturn(gridarr[i][j].color)) || gridarr[i][j].color > 6 && gridarr[i][j + 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j + 2].color == colorreturn(gridarr[i][j].color) && gridarr[i][j + 3].color == colorreturn(gridarr[i][j].color))
                         {
-                            gridarr[i][j].color = 6;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j + 3].color = 6;
+                            gridarr[i][j].color = 6;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j + 3].color = 6; gridarr[i - 1][j].color = 6; gridarr[i][j - 1].color = 6; gridarr[i + 1][j].color = 6; gridarr[i][j - 2].color = 6; gridarr[i][j - 3].color = 6;
                             a = i;
                             b = j;
                             for (int k = 1; a > 0; k++)
                             {
-                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color); swapping(gridarr[a][b + 3].color, gridarr[a - 1][b + 3].color);
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color);
+                                swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color); swapping(gridarr[a][b + 3].color, gridarr[a - 1][b + 3].color);
+                                a = a - 1;
+                                
+                            }
+                            gamescore += 80;
+                        }
+                        else if (gridarr[i][j].color > 6 && gridarr[i][j + 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j - 1].color == colorreturn(gridarr[i][j].color) || (gridarr[i][j].color > 6 && gridarr[i][j + 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j + 2].color == colorreturn(gridarr[i][j].color)) || (gridarr[i][j].color > 6 && gridarr[i][j - 1].color == colorreturn(gridarr[i][j].color) && gridarr[i][j - 2].color == colorreturn(gridarr[i][j].color)))
+                        {
+                            gridarr[i][j].color = 6;  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j - 1].color = 6; gridarr[i - 1][j].color = 6; gridarr[i][j - 1].color = 6; gridarr[i + 1][j].color = 6;
+                            a = i;
+                            b = j;
+                            for (int k = 1; a > 0; k++)
+                            {
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color);  swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color);
                                 a = a - 1;
                             }
+                            gamescore += 70;
+                        }
+                        
+
+                    }
+                }
+                //special gem vertical:
+                for (int i = 0; i < 8; i++)
+                {
+
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (gridarr[i][j].color > 6 && gridarr[i + 1][j].color == colorreturn(gridarr[i][j].color) && gridarr[i + 2][j].color == colorreturn(gridarr[i][j].color) && gridarr[i + 3][j].color == colorreturn(gridarr[i][j].color) || (gridarr[i][j].color > 6 && gridarr[i + 1][j].color == colorreturn(gridarr[i][j].color) && gridarr[i + 2][j].color == colorreturn(gridarr[i][j].color) && gridarr[i - 1][j].color == colorreturn(gridarr[i][j].color)) || (gridarr[i][j].color > 6 && gridarr[i + 1][j].color == colorreturn(gridarr[i][j].color) && gridarr[i - 2][j].color == colorreturn(gridarr[i][j].color) && gridarr[i - 1][j].color == colorreturn(gridarr[i][j].color)) || (gridarr[i][j].color > 6 && gridarr[i - 1][j].color == colorreturn(gridarr[i][j].color) && gridarr[i - 2][j].color == colorreturn(gridarr[i][j].color) && gridarr[i - 3][j].color == colorreturn(gridarr[i][j].color)))
+                        {
+                            gridarr[i][j].color = 6; gridarr[i + 1][j].color = 6; gridarr[i + 2][j].color = 6; gridarr[i + 3][j].color = 6; gridarr[i][j + 1].color = 6; gridarr[i][j - 2].color = 6; gridarr[i + 1][j].color = 6; gridarr[i - 1][j].color = 6; gridarr[i - 3][j].color = 6;
+                            a = i;
+                            b = j;
+                            for (int k = 1; a > 0; k++)
+                            {
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color);
+                                swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color); swapping(gridarr[a + 3][b].color, gridarr[a + 2][b].color);
+                                a = a - 1;
+                            }
+                            gamescore += 80;
+                        }
+                        else if (gridarr[i][j].color > 6 && gridarr[i - 1][j].color == colorreturn(gridarr[i][j].color) && gridarr[i + 1][j].color == colorreturn(gridarr[i][j].color) || (gridarr[i][j].color > 6 && gridarr[i - 1][j].color == colorreturn(gridarr[i][j].color) && gridarr[i - 2][j].color == colorreturn(gridarr[i][j].color)) || (gridarr[i][j].color > 6 && gridarr[i + 1][j].color == colorreturn(gridarr[i][j].color) && gridarr[i + 2][j].color == colorreturn(gridarr[i][j].color)))
+                        {
+                            gridarr[i][j].color = 6; gridarr[i + 1][j].color = 6; gridarr[i - 1][j].color = 6; gridarr[i - 2][j].color = 6; gridarr[i + 2][j].color = 6;
+                            a = i;
+                            b = j;
+                            for (int k = 1; a > 0; k++)
+                            {
+                                swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a - 1][b].color, gridarr[a - 2][b].color);
+                                a = a - 1;
+                            }
+                            gamescore += 70;
+                        }
+
+                    }
+                }
+                //horizontal matches:
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if ((gridarr[i][j].color == gridarr[i][j + 1].color) && (gridarr[i][j].color == gridarr[i][j + 2].color) && (gridarr[i][j].color == gridarr[i][j + 3].color))
+                        {
+                            gridarr[i][j].color = colorreturn(gridarr[i][j].color);  gridarr[i][j + 1].color = 6; gridarr[i][j + 2].color = 6; gridarr[i][j + 3].color = 6;
+                            a = i;
+                            b = j;
+                            for (int k = 1; a > 0; k++)
+                            {
+                                //swapping(gridarr[a][b].color, gridarr[a - 1][b].color); 
+                                swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color); swapping(gridarr[a][b + 3].color, gridarr[a - 1][b + 3].color);
+                                a = a - 1;
+                            }
+                            gamescore += 40;
                         }
                         else if (gridarr[i][j].color == gridarr[i][j + 1].color && (gridarr[i][j].color == gridarr[i][j + 2].color))
                         {
@@ -481,10 +604,11 @@ int main()
                                 swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a][b + 1].color, gridarr[a - 1][b + 1].color); swapping(gridarr[a][b + 2].color, gridarr[a - 1][b + 2].color);
                                 a = a - 1;
                             }
+                            gamescore += 30;
                         }
                     }
                 }
-               
+               //vertical matches:
                     for (int i = 0; i < 6; i++)
                     {
 
@@ -492,14 +616,16 @@ int main()
                         {
                             if (gridarr[i][j].color == gridarr[i + 1][j].color && gridarr[i][j].color == gridarr[i + 2][j].color && gridarr[i][j].color == gridarr[i + 3][j].color)
                             {
-                                gridarr[i][j].color = 6; gridarr[i + 1][j].color = 6; gridarr[i + 2][j].color = 6; gridarr[i + 3][j].color = 6;
+                                gridarr[i][j].color = colorreturn(gridarr[i][j].color); gridarr[i + 1][j].color = 6; gridarr[i + 2][j].color = 6; gridarr[i + 3][j].color = 6;
                                 a = i;
                                 b = j;
                                 for (int k = 1; a > 0; k++)
                                 {
-                                    swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color); swapping(gridarr[a + 3][b].color, gridarr[a + 2][b].color);
+                                   // swapping(gridarr[a][b].color, gridarr[a - 1][b].color);
+                                    swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color); swapping(gridarr[a + 3][b].color, gridarr[a + 2][b].color);
                                     a = a - 1;
                                 }
+                                gamescore += 40;
                             }
                             else if (gridarr[i][j].color == gridarr[i + 1][j].color && gridarr[i][j].color == gridarr[i + 2][j].color)
                             {
@@ -511,24 +637,14 @@ int main()
                                     swapping(gridarr[a][b].color, gridarr[a - 1][b].color); swapping(gridarr[a + 1][b].color, gridarr[a][b].color); swapping(gridarr[a + 2][b].color, gridarr[a + 1][b].color);
                                     a = a - 1;
                                 }
+                                gamescore += 30;
                             }
                         }
                     }
                     
 
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        if (gridarr[i][j].color == 6)
-                        {
-                            gridarr[i][j].color = rand() % 5;
-                        }
-                    }
-                }
+              
 
-
-                
                 cursorx = cursor.getPosition().x;
                 cursory = cursor.getPosition().y;
                 if (pressedenter)
@@ -577,7 +693,7 @@ int main()
                     
                 }
                                    
-                else if (clicked == 1)
+                else if (clicked == 1 && gridarr[cursorj][cursori].color!=12)
                 {
                     int temp; 
                     if (pressed1)
@@ -615,9 +731,76 @@ int main()
                         clicked = 0;
                     }
                 }
-                
+                else if (clicked == 1 && gridarr[cursorj][cursori].color == 12)
+                {                  
+                    if (pressed1)
+                    {
+                        swapcolor = gridarr[cursorj - 1][cursori].color;
+                        clicked = 0;
+                        pressed1 = false;
+                        gridarr[cursorj][cursori].color = rand() % 5;
+                        click = 1;
+                    }
+                    else if (pressed2)
+                    {
+                        swapcolor = gridarr[cursorj + 1][cursori].color;
+                        clicked = 0;
+                        pressed2 = false;
+                        gridarr[cursorj][cursori].color = rand() % 5;
+                        click = 1;
+                    }
+                    else if (pressed3)
+                    {
+                        swapcolor = gridarr[cursorj][cursori - 1].color;
+                        clicked = 0;
+                        pressed3 = false;
+                        gridarr[cursorj][cursori].color = rand() % 5;
+                        click = 1;
+                    }
+                    else if (pressed4)
+                    {
+                        swapcolor = gridarr[cursorj][cursori + 1].color;
+                        clicked = 0;
+                        pressed4 = false;
+                        gridarr[cursorj][cursori].color = rand() % 5;
+                        click = 1;
+                    }
+                    if (click == 1)
+                    {
+                        for (int i = 0; i < 8; i++)
+                        {
+                            for (int j = 0; j < 8; j++)
+                            {
+                                if (gridarr[i][j].color == swapcolor)
+                                {
+                                    gridarr[i][j].color = 6;
+                                    gamescore += 10;
+                                }
+                            }
+                        }
+                        click = 0;
+                    }
+                }
 
-
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (gridarr[i][j].color == 6)
+                        {
+                            gridarr[i][j].color = rand() % 5;
+                        }
+                        if (gridarr[i][j].color == 7 || gridarr[i][j].color>12)
+                        {
+                            gridarr[i][j].color = rand() % 5;
+                        }
+                    }
+                }
+                if (onetimescore ==0)
+                {
+                    gamescore = 0;
+                    onetimescore=1 ;
+                }
 
                 
             
@@ -658,7 +841,10 @@ int main()
             {
                 timebartexture1.loadFromImage(timebar10);
             }
-            else if (gametimedisplay.asSeconds()>101) cout << "game over";                                                      //change later!!!!!!!!!!!!!!!!!!!
+            else if (gametimedisplay.asSeconds() > 101)
+            {
+                cout << "game over"; gameend = 1;
+            }
             
         }
        
